@@ -1,0 +1,23 @@
+{
+    "clear_results": false,
+    "control_freq_hz": 48,
+    "ctrl_effort_coef": 0.0,
+    "distance_threshold": 0.5,
+    "env_id": "SingleDroneRel-v0",
+    "exp_name": "neg_dist_reward_th_05_bound_101003",
+    "gui": false,
+    "learning_starts": 1000,
+    "log": false,
+    "max_episode_steps": 500,
+    "num_tests": 20,
+    "output_folder": "summarized_results_norm_rel_coords",
+    "plot": false,
+    "record": false,
+    "remarks": "sac_rb_neg_dist_penalty",
+    "run_name": "",
+    "seed": 0,
+    "simulation_freq_hz": 240,
+    "speed_limit": 2,
+    "test": false,
+    "total_timesteps": 2000000.0
+}

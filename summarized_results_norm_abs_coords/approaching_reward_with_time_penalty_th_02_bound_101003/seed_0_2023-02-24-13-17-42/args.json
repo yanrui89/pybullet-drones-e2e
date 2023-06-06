@@ -1,0 +1,22 @@
+{
+    "clear_results": false,
+    "control_freq_hz": 48,
+    "ctrl_effort_coef": 0.0,
+    "distance_threshold": 0.2,
+    "env_id": "SingleDrone-v0",
+    "exp_name": "test_th_dist_02",
+    "gui": false,
+    "learning_starts": 1000,
+    "log": false,
+    "max_episode_steps": 500,
+    "num_tests": 10,
+    "output_folder": "norm_env_results_2",
+    "plot": false,
+    "remarks": "boundary: (10, 10, 3), dist threshold: 0.2, approaching_reward_norm_by_init_dist_and_step_penalty_0.01",
+    "run_name": "",
+    "seed": 0,
+    "simulation_freq_hz": 240,
+    "speed_limit": 2,
+    "total_timesteps": 2000000,
+    "train": true
+}

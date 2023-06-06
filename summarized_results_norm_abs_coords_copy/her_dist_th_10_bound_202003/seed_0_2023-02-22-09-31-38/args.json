@@ -1,0 +1,22 @@
+{
+    "clear_results": false,
+    "control_freq_hz": 48,
+    "ctrl_effort_coef": 0.0,
+    "distance_threshold": 1.0,
+    "env_id": "SingleDroneGoal-v0",
+    "exp_name": "test5",
+    "gui": false,
+    "learning_starts": 500,
+    "log": false,
+    "max_episode_steps": 500,
+    "num_tests": 10,
+    "output_folder": "goal_env_results_2",
+    "plot": false,
+    "remarks": "boundary: (20, 20, 3), dist threshold: 1.0",
+    "run_name": "",
+    "seed": 0,
+    "simulation_freq_hz": 240,
+    "speed_limit": 2,
+    "total_timesteps": 2000000,
+    "train": true
+}

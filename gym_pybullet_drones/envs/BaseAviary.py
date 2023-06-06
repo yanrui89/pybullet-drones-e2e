@@ -122,6 +122,7 @@ class BaseAviary(gym.Env):
             self.MAX_XY_TORQUE = (2*self.L*self.KF*self.MAX_RPM**2)/np.sqrt(2)
         elif self.DRONE_MODEL in [DroneModel.CF2P, DroneModel.HB]:
             self.MAX_XY_TORQUE = (self.L*self.KF*self.MAX_RPM**2)
+        # https://www.chegg.com/homework-help/questions-and-answers/mainly-two-kinds-quadrotor-uav-market-plus-type-x-type-different-local-coordinate-result-d-q104557496
         self.MAX_Z_TORQUE = (2*self.KM*self.MAX_RPM**2)
         self.GND_EFF_H_CLIP = 0.25 * self.PROP_RADIUS * np.sqrt((15 * self.MAX_RPM**2 * self.KF * self.GND_EFF_COEFF) / self.MAX_THRUST)
         #### Create attributes for vision tasks ####################
@@ -129,6 +130,8 @@ class BaseAviary(gym.Env):
         if self.VISION_ATTR:
             self.IMG_RES = np.array([64, 48])
             self.IMG_FRAME_PER_SEC = 24
+            # self.IMG_RES = np.array([225, 225])
+            # self.IMG_FRAME_PER_SEC = 24
             self.IMG_CAPTURE_FREQ = int(self.SIM_FREQ/self.IMG_FRAME_PER_SEC)
             self.rgb = np.zeros(((self.NUM_DRONES, self.IMG_RES[1], self.IMG_RES[0], 4)))
             self.dep = np.ones(((self.NUM_DRONES, self.IMG_RES[1], self.IMG_RES[0])))
@@ -155,7 +158,7 @@ class BaseAviary(gym.Env):
             self.CLIENT = p.connect(p.GUI) # p.connect(p.GUI, options="--opengl2")
             for i in [p.COV_ENABLE_RGB_BUFFER_PREVIEW, p.COV_ENABLE_DEPTH_BUFFER_PREVIEW, p.COV_ENABLE_SEGMENTATION_MARK_PREVIEW]:
                 p.configureDebugVisualizer(i, 0, physicsClientId=self.CLIENT)
-            p.resetDebugVisualizerCamera(cameraDistance=3,
+            p.resetDebugVisualizerCamera(cameraDistance=8,
                                          cameraYaw=-30,
                                          cameraPitch=-30,
                                          cameraTargetPosition=[0, 0, 0],
@@ -614,6 +617,9 @@ class BaseAviary(gym.Env):
             Frame number to append to the PNG's filename.
 
         """
+        if not os.path.exists(path):
+            os.makedirs(path, exist_ok=True)
+
         if img_type == ImageType.RGB:
             (Image.fromarray(img_input.astype('uint8'), 'RGBA')).save(os.path.join(path,"frame_"+str(frame_num)+".png"))
         elif img_type == ImageType.DEP:

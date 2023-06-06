@@ -80,6 +80,12 @@ class Logger(object):
 
     ################################################################################
 
+    def reset(self):
+        self.counters = np.zeros(self.NUM_DRONES)
+        self.timestamps = np.zeros((self.NUM_DRONES, 0))
+        self.states = np.zeros((self.NUM_DRONES, 16, 0)) 
+        self.controls = np.zeros((self.NUM_DRONES, 12, 0))
+
     def log(self,
             drone: int,
             timestamp,
@@ -120,11 +126,14 @@ class Logger(object):
 
     ################################################################################
 
-    def save(self):
+    def save(self, **kwargs):
         """Save the logs to file.
         """
+        save_contents = {"timestamps": self.timestamps, "states": self.states, "controls": self.controls}
+        if kwargs is not None:
+            save_contents.update(kwargs)
         with open(os.path.join(self.OUTPUT_FOLDER, "save-flight-"+datetime.now().strftime("%m.%d.%Y_%H.%M.%S")+".npy"), 'wb') as out_file:
-            np.savez(out_file, timestamps=self.timestamps, states=self.states, controls=self.controls)
+            np.savez(out_file, **save_contents)
 
     ################################################################################
 
@@ -214,7 +223,8 @@ class Logger(object):
         #### Loop over colors and line styles ######################
         plt.rc('axes', prop_cycle=(cycler('color', ['r', 'g', 'b', 'y']) + cycler('linestyle', ['-', '--', ':', '-.'])))
         fig, axs = plt.subplots(10, 2)
-        t = np.arange(0, self.timestamps.shape[1]/self.LOGGING_FREQ_HZ, 1/self.LOGGING_FREQ_HZ)
+        # t = np.arange(0, self.timestamps.shape[1]/self.LOGGING_FREQ_HZ, 1/self.LOGGING_FREQ_HZ)
+        t = self.timestamps[0]
 
         #### Column ################################################
         col = 0

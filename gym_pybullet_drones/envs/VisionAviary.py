@@ -130,7 +130,7 @@ class VisionAviary(BaseAviary):
                                                                    high=100,
                                                                    shape=(self.IMG_RES[1],
                                                                    self.IMG_RES[0]),
-                                                                   dtype=np.int
+                                                                   dtype=int
                                                                    )
                                                  }) for i in range(self.NUM_DRONES)})
     
@@ -157,8 +157,8 @@ class VisionAviary(BaseAviary):
                 self.rgb[i], self.dep[i], self.seg[i] = self._getDroneImages(i)
                 #### Printing observation to PNG frames example ############
                 if self.RECORD:
-                    self._exportImage(img_type=ImageType.RGB, # ImageType.BW, ImageType.DEP, ImageType.SEG
-                                      img_input=self.rgb[i],
+                    self._exportImage(img_type=ImageType.DEP, # ImageType.BW, ImageType.DEP, ImageType.SEG
+                                      img_input=self.dep[i],
                                       path=self.ONBOARD_IMG_PATH+"drone_"+str(i),
                                       frame_num=int(self.step_counter/self.IMG_CAPTURE_FREQ)
                                       )
