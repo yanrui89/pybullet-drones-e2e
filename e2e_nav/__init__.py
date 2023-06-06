@@ -18,3 +18,9 @@ register(
     max_episode_steps=500
 )
 
+register(
+    id="SingleDroneRew-v0",
+    entry_point="e2e_nav.envs:SingleDroneRewEnv",
+    max_episode_steps=500
+)
+
